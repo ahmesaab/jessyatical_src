@@ -14,6 +14,15 @@ module.exports = {
                 callback(result.rows[0]);
         });
     },
+    finAll:function(client,callback){
+        client.query('SELECT * FROM users', function(err, result)
+        {
+            if(err)
+                callback(null,err);
+            else
+                callback(result.rows);
+        });
+    },
     getCompanies:function (id,client,callback) {
         client.query('SELECT c.* FROM companies c INNER JOIN teams t ON t.company_id = c.id ' +
         'WHERE t.user_id=$1::int LIMIT 5',[id], function(err, result)

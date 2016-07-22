@@ -31,8 +31,17 @@ router.get('/users',function(req, res, next) {
 
 /* REST api to get top active users */
 router.get('/topActiveUsers',function(req, res, next) {
-  service.getUserDetails(function(list) {
-    res.json(list);
+  service.getTopActiveUsers(req.query.page,function(list) {
+    if(list == null)
+    {
+      res.status(500);
+      res.json({
+        "status": 500,
+        "message": "Bad Request"
+      });
+    }
+    else
+      res.json(list);
   })
 });
 
