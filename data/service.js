@@ -1,7 +1,7 @@
 var pool = require('./db.js');
-var User = require('../models/user.js');
-var Listing = require('../models/listing.js');
-var Application = require('../models/application.js');
+var User = require('dao/user.js');
+var Listing = require('dao/listing.js');
+var Application = require('dao/application.js');
 
 Service = {
     getUserDetails:function(id,callback) {
@@ -21,8 +21,8 @@ Service = {
                                 user.companies = companies;
                                 Application.findByUser(user,client,function(applications){
                                     user.applications = applications;
-                                    done();
                                     callback(user);
+                                    done();
                                 });
                             });
                         });

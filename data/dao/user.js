@@ -16,7 +16,7 @@ module.exports = {
     },
     getCompanies:function (id,client,callback) {
         client.query('SELECT c.* FROM companies c INNER JOIN teams t ON t.company_id = c.id ' +
-        'WHERE t.user_id=$1::int',[id], function(err, result)
+        'WHERE t.user_id=$1::int LIMIT 5',[id], function(err, result)
         {
             if(err)
                 callback(null,err);

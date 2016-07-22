@@ -31,10 +31,9 @@ router.get('/users',function(req, res, next) {
 
 /* REST api to get top active users */
 router.get('/topActiveUsers',function(req, res, next) {
-  res.json({
-    "status": 500,
-    "message": "Invalid Parameters"
-  });
+  service.getUserDetails(function(list) {
+    res.json(list);
+  })
 });
 
 

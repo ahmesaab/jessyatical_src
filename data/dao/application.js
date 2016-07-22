@@ -1,6 +1,14 @@
 /**
  * Created by Ahmed on 7/21/2016.
  */
+function getByApplicationId(arr, value) {
+
+    for (var i=0, iLen=arr.length; i<iLen; i++) {
+
+        if (arr[i].a_id == value) return arr[i];
+    }
+    return null;
+}
 
 module.exports = {
     findByUser:function (user,client,callback) {
@@ -17,13 +25,19 @@ module.exports = {
                 var applications = [];
                 var results = result.rows;
                 for(var i=0;i<results.length;i++) {
-                    if (applications[results[i].a_id] == null) {
+                    if (getByApplicationId(applications, results.a_id) == null && applications.length<5) {
                         applications.push({
                             id: results[i].a_id, created_at: results[i].a_created_at
                             , cover_letter: results[i].a_cover_letter, listings: []
                         });
                     }
-                    applications[results[i].a_id].listings.push("dede");
+                    var listings = getByApplicationId(applications, results.a_id).listings;
+                    if(listings.length < 5)
+                    {
+                        listings.push({
+                            id:results[i].l_id,name:results[i].l_name,description:results[i].l_description
+                        });
+                    }
                 }
                 callback(applications);
             }
