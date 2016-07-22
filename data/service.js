@@ -4,7 +4,7 @@ var Listing = require('./dao/listing.js');
 var Application = require('./dao/application.js');
 var Utils = require('./utils');
 
-var pageSize = 2;
+var pageSize = 4;
 
 Service = {
     getUserDetails:function(id,callback) {
