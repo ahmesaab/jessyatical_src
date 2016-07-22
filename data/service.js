@@ -5,6 +5,12 @@ var Application = require('./dao/application.js');
 
 var pageSize = 3;
 
+function isInt(number)
+{
+   return typeof(number) != "boolean" &&
+       !isNaN(number) && number.indexOf('.')==-1 && number.indexOf('-')==-1
+}
+
 Service = {
     getUserDetails:function(id,callback) {
         pool.connect(function (err, client, done) {
@@ -37,7 +43,7 @@ Service = {
         pool.connect(function (err, client, done) {
             if (err)
                 callback(null, err);
-            else if (typeof(page) != "boolean" && !isNaN(page) && page.indexOf('.')==-1)
+            else if (isInt(page))
             {
                 client.query('SELECT u.*, COUNT(a.id) as count FROM applications a RIGHT JOIN users u' +
                 ' ON u.id = a.user_id GROUP BY u.id,a.id ORDER BY count DESC OFFSET '+(page-1)*(pageSize)+
@@ -46,15 +52,37 @@ Service = {
                     if(err)
                     {
                         console.log(err);
-                        callback(null,err);
+                        callback(null,err,500);
                     }
                     else
-                        callback(result.rows);
+                    {
+                        var users = result.rows;
+                        if(users.length!=0)
+                        {
+                            var userIds = [];
+                            for( var i=0;i<users.length;i++) {
+                                userIds.push(users[i].id)
+                                users[i].listing = [];
+                            }
+                            Application.findTopAppliedListingNamesByUsers(userIds,client,function(listings) {
+                                for(var i=0; i < listings.length; i++){
+                                    var user = users.filter( function( obj ) {
+                                        return obj.id == listings[i].user_id;
+                                    })[0];
+                                    user.listing.push(listings[i].name);
+                                }
+                                callback(users);
+                            });
+                        }
+                        else {
+                            callback(null,"page not found",404)
+                        }
+                    }
                 });
             }
             else
             {
-                callback(null,"page is not a number");
+                callback(null,"page is not valid",500);
             }
         });
     }
