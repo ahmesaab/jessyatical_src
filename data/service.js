@@ -4,7 +4,7 @@ var Listing = require('./dao/listing.js');
 var Application = require('./dao/application.js');
 var Utils = require('./utils');
 
-var pageSize = 3;
+var pageSize = 2;
 
 Service = {
     getUserDetails:function(id,callback) {
@@ -42,7 +42,7 @@ Service = {
             {
                 var date = Utils.dateBySubtractingDays(new Date(),7);
                 client.query('SELECT u.*, COUNT(a.id) as count FROM applications a RIGHT JOIN ' +
-                'users u ON u.id = a.user_id WHERE a.created_at > $1::timestamp GROUP BY u.id,a.id ' +
+                'users u ON u.id = a.user_id WHERE a.created_at > $1::timestamp GROUP BY u.id ' +
                 'ORDER BY count DESC OFFSET '+(page-1)*(pageSize)+' ROWS FETCH NEXT '+ pageSize +
                 ' ROWS ONLY',[date], function(err, result) {
                     if(err)

@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="889f4b13-4070-4f92-8075-a81011dc4e04" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/utils.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/dao/application.js" afterPath="$PROJECT_DIR$/data/dao/application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/dao/listing.js" afterPath="$PROJECT_DIR$/data/dao/listing.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/service.js" afterPath="$PROJECT_DIR$/data/service.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -30,21 +27,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.552901" vertical-offset="0" max-vertical-offset="935">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="935">
               <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="service.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="service.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/data/service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="193" max-vertical-offset="1564">
-              <caret line="24" column="62" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.5321429" vertical-offset="599" max-vertical-offset="1564">
+              <caret line="44" column="93" selection-start-line="44" selection-start-column="93" selection-end-line="44" selection-end-column="93" />
               <folding />
             </state>
           </provider>
@@ -54,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/data/dao/application.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
-              <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+              <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -120,9 +117,9 @@
         <option value="$PROJECT_DIR$/data/dao/user.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/data/utils.js" />
-        <option value="$PROJECT_DIR$/data/service.js" />
         <option value="$PROJECT_DIR$/data/dao/listing.js" />
         <option value="$PROJECT_DIR$/data/dao/application.js" />
+        <option value="$PROJECT_DIR$/data/service.js" />
       </list>
     </option>
   </component>
@@ -315,7 +312,13 @@
       <option name="project" value="LOCAL" />
       <updated>1469213716789</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="added limit and date constraints to both APIs">
+      <created>1469219350092</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1469219350092</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -365,7 +368,8 @@
     <MESSAGE value="user detail api (no date, dao implementation )" />
     <MESSAGE value="top activities api count and sort" />
     <MESSAGE value="top activities api listings" />
-    <option name="LAST_COMMIT_MESSAGE" value="top activities api listings" />
+    <MESSAGE value="added limit and date constraints to both APIs" />
+    <option name="LAST_COMMIT_MESSAGE" value="added limit and date constraints to both APIs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -618,26 +622,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="935">
+          <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/data/dao/application.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
-          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="193" max-vertical-offset="1564">
-          <caret line="24" column="62" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.552901" vertical-offset="0" max-vertical-offset="935">
-          <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.5321429" vertical-offset="599" max-vertical-offset="1564">
+          <caret line="44" column="93" selection-start-line="44" selection-start-column="93" selection-end-line="44" selection-end-column="93" />
           <folding />
         </state>
       </provider>
