@@ -2,14 +2,9 @@ var pool = require('./db.js');
 var User = require('./dao/user.js');
 var Listing = require('./dao/listing.js');
 var Application = require('./dao/application.js');
+var Utils = require('./utils');
 
 var pageSize = 3;
-
-function isInt(number)
-{
-   return typeof(number) != "boolean" &&
-       !isNaN(number) && number.indexOf('.')==-1 && number.indexOf('-')==-1
-}
 
 Service = {
     getUserDetails:function(id,callback) {
@@ -43,12 +38,13 @@ Service = {
         pool.connect(function (err, client, done) {
             if (err)
                 callback(null, err);
-            else if (isInt(page))
+            else if (Utils.isPositiveInt(page))
             {
-                client.query('SELECT u.*, COUNT(a.id) as count FROM applications a RIGHT JOIN users u' +
-                ' ON u.id = a.user_id GROUP BY u.id,a.id ORDER BY count DESC OFFSET '+(page-1)*(pageSize)+
-                ' ROWS FETCH NEXT '+ pageSize +' ROWS ONLY', function(err, result)
-                {
+                var date = Utils.dateBySubtractingDays(new Date(),7);
+                client.query('SELECT u.*, COUNT(a.id) as count FROM applications a RIGHT JOIN ' +
+                'users u ON u.id = a.user_id WHERE a.created_at > $1::timestamp GROUP BY u.id,a.id ' +
+                'ORDER BY count DESC OFFSET '+(page-1)*(pageSize)+' ROWS FETCH NEXT '+ pageSize +
+                ' ROWS ONLY',[date], function(err, result) {
                     if(err)
                     {
                         console.log(err);
@@ -61,7 +57,7 @@ Service = {
                         {
                             var userIds = [];
                             for( var i=0;i<users.length;i++) {
-                                userIds.push(users[i].id)
+                                userIds.push(users[i].id);
                                 users[i].listing = [];
                             }
                             Application.findTopAppliedListingNamesByUsers(userIds,client,function(listings) {
