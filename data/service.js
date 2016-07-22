@@ -1,32 +1,36 @@
-function Service()
-{
-    // ATTRIBUTE: database connection object from mysql pool.
-    this._pool = require('./db.js');
-}
+var pool = require('./db.js');
+var User = require('../models/user.js');
+var Listing = require('../models/listing.js');
+var Application = require('../models/application.js');
 
-// METHOD: query the database by user_id & returns a user model or null if the user doesn't exist.
-Service.prototype.getUser = function(id,callback,error)
-{
-    this._pool.connect(function(err, client, done) {
-        if(err) {
-            return console.error('error fetching client from pool', err);
-        }
-        client.query('SELECT * FROM users WHERE id=$1::int',[id], function(err, result) {
-            done();
-            if(err)
-            {
-                console.error('error running query', err.message);
-                error();
-            }
-            else if (result.rowCount ==0)
-                callback(null);
-            else
-            {
-                console.log(result);
-                callback(result.rows[0]);
+Service = {
+    getUserDetails:function(id,callback) {
+        pool.connect(function (err, client, done) {
+            if (err)
+                callback(null, err);
+            else {
+                User.findById(id, client, function (user, err){
+                    if (err) {
+                        done();
+                        callback(null, err)
+                    }
+                    else {
+                        Listing.findByUser(user, client, function (listings) {
+                            user.createdListings = listings;
+                            User.getCompanies(id, client, function (companies) {
+                                user.companies = companies;
+                                Application.findByUser(user,client,function(applications){
+                                    user.applications = applications;
+                                    done();
+                                    callback(user);
+                                });
+                            });
+                        });
+                    }
+                });
             }
         });
-    });
-};
+    }
+}
 
 module.exports = Service;
