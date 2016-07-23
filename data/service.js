@@ -79,7 +79,8 @@ Service = {
                                     var user = users.filter( function( obj ) {
                                         return obj.id == listings[i].user_id;
                                     })[0];
-                                    user.listing.push(listings[i].name);
+                                    if(user.listing.length < 3)
+                                        user.listing.push(listings[i].name);
                                 }
                                 callback(users);
                             });
